@@ -1,10 +1,13 @@
 async function criarCliente() {
-  const nome = document.getElementById('nome').value;
-  const email = document.getElementById('email').value;
+  
+  nome = document.getElementById("nome").value
+  email = document.getElementById("email").value
+  telefone = document.getElementById("telefone").value
+
   await fetch("http://localhost:8080/api/clientes", {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ nome, email })
+    body: JSON.stringify({ nome, email, telefone })
   });
   listarClientes();
 }
@@ -16,7 +19,7 @@ async function listarClientes() {
   lista.innerHTML = '';
   clientes.forEach(cliente => {
     const item = document.createElement('li');
-    item.textContent = `ID: ${cliente.id} | Nome: ${cliente.nome} | Email: ${cliente.email}`;
+    item.textContent = `ID: ${cliente.id} | Nome: ${cliente.nome} | Email: ${cliente.email} | Telefone: ${cliente.telefone}`;
     lista.appendChild(item);
   });
 }
@@ -28,7 +31,7 @@ async function atualizarCliente() {
   await fetch(`http://localhost:8080/api/clientes/${id}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ nome, email })
+    body: JSON.stringify({ nome, email, telefone })
   });
   listarClientes();
 }
